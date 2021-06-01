@@ -1,10 +1,18 @@
 (ns troy-west.cronut
   (:refer-clojure :exclude [proxy])
-  (:require [clojure.tools.logging :as log]
-            [integrant.core :as ig])
-  (:import (org.quartz Scheduler Job SimpleScheduleBuilder JobExecutionException JobBuilder TriggerBuilder JobDetail CronScheduleBuilder DisallowConcurrentExecution)
+  (:require [clojure.tools.logging :as log])
+  (:import (org.quartz Scheduler
+                       Job
+                       SimpleScheduleBuilder
+                       JobExecutionException
+                       JobBuilder
+                       TriggerBuilder
+                       JobDetail
+                       CronScheduleBuilder
+                       DisallowConcurrentExecution)
            (org.quartz.impl StdSchedulerFactory)
-           (org.quartz.spi JobFactory TriggerFiredBundle)
+           (org.quartz.spi JobFactory
+                           TriggerFiredBundle)
            (java.util TimeZone)))
 
 (defn base-trigger-builder
@@ -154,14 +162,6 @@
 (defn shutdown
   [scheduler]
   (.shutdown ^Scheduler scheduler))
-
-(defmethod ig/init-key :cronut/scheduler
-  [_ config]
-  (initialize config))
-
-(defmethod ig/halt-key! :cronut/scheduler
-  [_ scheduler]
-  (shutdown scheduler))
 
 (def data-readers
   {'cronut/trigger  troy-west.cronut/trigger-builder

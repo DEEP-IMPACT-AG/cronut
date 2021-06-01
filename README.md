@@ -1,4 +1,8 @@
-# Cronut: Scheduled Execution via Quartz and Integrant
+# Cronut: Scheduled Execution via Quartz
+
+...with no dependencies on 3rd party state management libraries. Because
+
+![mkay](mkay.png)
 
 [![Clojars Project](https://img.shields.io/clojars/v/com.troy-west/cronut.svg)](https://clojars.org/com.troy-west/cronut) [![CircleCI](https://circleci.com/gh/troy-west/cronut.svg?style=svg)](https://circleci.com/gh/troy-west/cronut)
 
@@ -15,13 +19,12 @@ Clojure has two existing wrappers for Quartz:
 
 How does Cronut differ?
 
-1. Configured entirely from data (with [Integrant](https://github.com/weavejester/integrant) bindings provided)
 2. No macros or new protocols, just implement the org.quartz.Job interface
 3. No global Clojure state
 4. Latest version of Quartz
 5. Tagged literals to shortcut common use-cases (#cronut/cron, #cronut/interval)
 6. Easily extensible for further triggers / tagged literals
-7. Zero dependencies other than Clojure, Quartz, and Integrant
+7. Zero dependencies other than Clojure, and Quartz
 8. Configurable control of concurrent job execution
 
 # Usage
@@ -63,6 +66,16 @@ The `:job` in every scheduled item must implement the org.quartz.Job interface
 
 The expectation being that every 'job' in your Integrant system will reify that interface, either directly via `reify`
 or by returning a defrecord that implements the interface. e.g.
+
+````clojure
+(defmethod ig/init-key :cronut/scheduler
+  [_ config]
+  (initialize config))
+
+(defmethod ig/halt-key! :cronut/scheduler
+  [_ scheduler]
+  (shutdown scheduler))
+````
 
 ````clojure
 (defmethod ig/init-key :test.job/one
