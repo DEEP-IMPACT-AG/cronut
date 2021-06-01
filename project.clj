@@ -1,4 +1,4 @@
-(defproject ch.deepimpact/cronut "0.2.8"
+(defproject ch.deepimpact/cronut "0.2.9-SNAPSHOT"
 
   :description "Clojure Scheduled Execution via Quartzite"
 
