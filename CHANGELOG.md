@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.2.8] - 2021-06-01
+
+- Remove the dependency on integrant
+
 ## [0.2.6] - 2020-07-14
 
 - Suppport global :disallowConcurrentExecution option (you will want to understand misfires if you use this).

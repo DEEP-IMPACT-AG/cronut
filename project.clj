@@ -1,8 +1,8 @@
-(defproject com.troy-west/cronut "0.2.8"
+(defproject ch.deepimpact/cronut "0.2.8"
 
   :description "Clojure Scheduled Execution via Quartzite"
 
-  :url "https://github.com/troy-west/cronut"
+  :url "https://github.com/DEEP-IMPACT-AG/cronut"
 
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v20.html"}
