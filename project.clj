@@ -10,8 +10,8 @@
   :plugins [[lein-cljfmt "0.6.6" :exclusions [org.clojure/clojure]]
             [jonase/eastwood "0.3.7" :exclusions [org.clojure/clojure]]
             [lein-kibit "0.1.8" :exclusions [org.clojure/clojure org.clojure/tools.reader]]
-            [s3-wagon-private "1.3.4" :exclusions [commons-logging
-                                                   com.fasterxml.jackson.core/jackson-core]]]
+            [s3-wagon-private "1.3.4" :exclusions [commons-logging]]
+            [com.fasterxml.jackson.core/jackson-core "2.9.10"]]
 
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/tools.logging "1.1.0"]
