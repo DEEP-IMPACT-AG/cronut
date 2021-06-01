@@ -29,6 +29,28 @@ How does Cronut differ?
 
 # Usage
 
+just implement this interface:
+````clojure
+(defrecord TestDefrecordJobImpl [identity description recover? durable? test-dep]
+  Job
+  (execute [this job-context]
+    (log/info "Defrecord Impl:" this)))
+````
+and then specify in the config something like
+````clojure
+; --- snip --- ;
+ :scheduled-jobs {:disallowConcurrentExecution? true
+                  :schedule {:job     {:identity          "your-namespace/testDefrecordJobImpl"
+                                       :description       "does stuff"
+                                       :recover?          true
+                                       :durable?          false
+                                       :key               "value"}
+                             :trigger #profile {:prod "0 0 23 ? * *"
+                                                :test "0 30 23 ? * *"
+                                                :default "0 0 0 ? * * 2099"}}}
+; --- snip --- ;
+````
+
 ## :cronut/scheduler
 
 Cronut provides lifecycle implementation for the Quartz Scheduler, exposed via Integrant / `:cronut/scheduler`
@@ -106,7 +128,7 @@ and pass that configuration through edn, e.g.
                    :durable?    false
                    :dep-one     #ig/ref :dep/one
                    :dep-two     #ig/ref :test.job/one}
-````                    
+````
 
 ### The :trigger
 
